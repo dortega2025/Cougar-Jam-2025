@@ -4,8 +4,9 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - testCard
   - batBat
+  - bearBear
+  - enemy
   layers:
   - Default
   - TransparentFX

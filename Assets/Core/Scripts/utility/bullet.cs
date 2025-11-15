@@ -1,8 +1,9 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class enemy : MonoBehaviour
+public class bullet : MonoBehaviour
 {
-    public float health = 10f;
+    public float damage = 1;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -13,5 +14,10 @@ public class enemy : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Destroy(gameObject);
     }
 }
