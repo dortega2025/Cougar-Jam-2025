@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Assets.Core.Scripts;
 using NUnit.Framework;
 using UnityEngine;
@@ -25,7 +28,13 @@ public class minuteMinute : card
     void Ability()
     {
         battleSystemManager battleSystem = FindAnyObjectByType<battleSystemManager>();
-        battleSystem.turnOrder.Dequeue();
-        battleSystem.turnOrder.Dequeue();
+        battleSystem.turnOrder = new Queue<GameObject>(battleSystem.turnOrder.Where(x => x.gameObject.name != target.name));
+        GameObject[] turns = battleSystem.turnOrder.ToArray();
+        for (int i = 0; i < turns.Length; i++)
+        {
+            Debug.Log(turns[i].ToString());
+        }
+        battleSystem.hasSkipped = true;
+        currPlayer.currEnergy -= energy;
     }
 }

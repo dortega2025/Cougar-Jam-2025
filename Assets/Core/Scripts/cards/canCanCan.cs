@@ -7,7 +7,7 @@ public class canCanCan : card
     public virtual void Start()
     {
         base.Start();
-        energy = 4f;
+        energy = 5f;
     }
 
     // Update is called once per frame
@@ -26,5 +26,6 @@ public class canCanCan : card
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("enemy");
         int rand = Random.Range(0, enemies.Length - 1);
         target.player = enemies[rand];
+        currPlayer.currEnergy -= energy;
     }
 }

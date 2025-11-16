@@ -11,22 +11,33 @@ namespace Assets.Core.Scripts {
         public bool selected;
         [SerializeField] protected enemy target;
         [SerializeField] protected card targetCard;
+        protected bool targetedPlayer;
         protected bool hasAttacked;
         public bool playerTurn;
         public bool extraTurn;
-        public float damageModifier = 0;
+        public float damageModifier = 0f;
+        public player currPlayer;
+        private Vector3 baseSize;
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         public virtual void Start()
         {
-            
+            currPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<player>();
+            baseSize = transform.localScale;
         }
 
         // Update is called once per frame
-        public void Update()
+        public virtual void Update()
         {
-            if (playerTurn)
+            if (playerTurn != currPlayer.playerTurn)
+            {
+                playerTurn = currPlayer.playerTurn;
+            }
+            if (playerTurn && currPlayer.currEnergy > energy)
             {
                 IsClicked();
+            } else
+            {
+                //display "not enough energy" message
             }
             if (selected)
             {
@@ -51,9 +62,11 @@ namespace Assets.Core.Scripts {
                 if (!selected)
                 {
                     selected = true;
+                    Select();
                 } else
                 {
                     selected = false;
+                    Deselect();
                 }
             }
         }
@@ -72,6 +85,16 @@ namespace Assets.Core.Scripts {
         {
             yield return new WaitForSeconds(3);
             Destroy(gameObject);
+        }
+
+        void Select()
+        {
+            transform.localScale += new Vector3(baseSize.x * 0.5f, baseSize.y * 0.5f, 0f);
+        }
+
+        void Deselect()
+        {
+            transform.localScale = baseSize;
         }
     }
 }

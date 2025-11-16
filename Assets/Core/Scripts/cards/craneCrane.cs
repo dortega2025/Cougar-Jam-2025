@@ -9,12 +9,16 @@ public class craneCrane : card
     public virtual void Start()
     {
         base.Start();
-        energy = 2f;
+        energy = 4f;
     }
 
     // Update is called once per frame
     public virtual void Update()
     {
+        if (playerTurn != currPlayer.playerTurn)
+        {
+            playerTurn = currPlayer.playerTurn;
+        }
         if (playerTurn)
         {
             IsClicked();
@@ -67,5 +71,6 @@ public class craneCrane : card
     void Ability()
     {
         targetCard.extraTurn = true;
+        currPlayer.currEnergy -= energy;
     }
 }

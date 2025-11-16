@@ -1,15 +1,19 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using NUnit.Framework;
 using UnityEngine;
 
-public class skellington : enemy
+public class enemySkipTurn : enemy
 {
     public GameObject bulletPrefab;
+    private bool hasSkipped;
     private float fireSpeed = 300f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public virtual void Start()
     {
         base.Start();
-        health = 15f;
+        health = 10f;
     }
 
     // Update is called once per frame
@@ -25,7 +29,25 @@ public class skellington : enemy
 
     void Ability()
     {
-        StartCoroutine(Attack());
+        int chanceRoll = Random.Range(1, 100);
+        if (!hasSkipped && chanceRoll <= 25)
+        {
+            StartCoroutine(SkipTurn());
+        } else
+        {
+            StartCoroutine(Attack());
+        }
+    }
+
+    public IEnumerator SkipTurn()
+    {
+        yield return new WaitForSeconds(2);
+        battleSystemManager battleSystem = FindFirstObjectByType<battleSystemManager>();
+        battleSystem.turnOrder = new Queue<GameObject>(battleSystem.turnOrder.Where(x => x.CompareTag("enemy")));
+        battleSystem.turnOrder.Enqueue(player);
+        isTurn = false;
+        hasSkipped = true;
+        battleSystem.nextTurn();
     }
 
     public IEnumerator Attack()
@@ -41,4 +63,5 @@ public class skellington : enemy
         battleSystemManager battleSystem = FindFirstObjectByType<battleSystemManager>();
         battleSystem.nextTurn();
     }
+    
 }

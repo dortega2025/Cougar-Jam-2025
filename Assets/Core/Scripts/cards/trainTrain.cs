@@ -9,12 +9,16 @@ public class trainTrain : card
     public virtual void Start()
     {
         base.Start();
-        energy = 3f;
+        energy = 5f;
     }
 
     // Update is called once per frame
     public virtual void Update()
     {
+        if (playerTurn != currPlayer.playerTurn)
+        {
+            playerTurn = currPlayer.playerTurn;
+        }
         if (playerTurn)
         {
             IsClicked();
@@ -31,7 +35,7 @@ public class trainTrain : card
             extraTurn = false;
             hasAttacked = false;
         }
-        if (selected && target != null && !hasAttacked)
+        if (selected && targetedPlayer && !hasAttacked)
         {
             Ability();
             hasAttacked = true;
@@ -67,5 +71,6 @@ public class trainTrain : card
     void Ability()
     {
         targetCard.damageModifier += damageFactor;
+        currPlayer.currEnergy -= energy;
     }
 }

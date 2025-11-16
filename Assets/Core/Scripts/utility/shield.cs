@@ -17,7 +17,7 @@ public class shield : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        health -= collision.gameObject.GetComponent<bullet>().damage;
+        health -= collision.gameObject.GetComponent<enemyBullet>().damage;
     }
 
     void CheckHealth()

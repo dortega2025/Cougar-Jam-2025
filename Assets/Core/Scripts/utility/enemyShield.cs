@@ -1,23 +1,16 @@
-using System.Collections;
-using NUnit.Framework;
 using UnityEngine;
 
-public class enemy : MonoBehaviour
+public class enemyShield : MonoBehaviour
 {
-    public float health;
-    public GameObject player;
-    public bool isTurn;
-    public bool hasAttacked;
-    public float damageModifier = 0f;
-
+    public float health = 5f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public virtual void Start()
+    void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        
     }
 
     // Update is called once per frame
-    public void Update()
+    void Update()
     {
         CheckHealth();
     }

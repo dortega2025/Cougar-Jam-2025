@@ -1,14 +1,14 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class bullet : MonoBehaviour
+public class enemyBullet : MonoBehaviour
 {
-    public float damage;
+    public float damage = 10f;
     private float timePassed;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        damage = 5f;
+        
     }
 
     // Update is called once per frame

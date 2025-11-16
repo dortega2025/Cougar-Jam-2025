@@ -6,12 +6,12 @@ public class mortarMortar : card
 {
     private GameObject[] targets;
     public GameObject bulletPrefab;
-    private float fireSpeed = 10f;
+    private float fireSpeed = 300f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public virtual void Start()
     {
         base.Start();
-        energy = 3f;
+        energy = 5f;
     }
 
     // Update is called once per frame
@@ -38,5 +38,6 @@ public class mortarMortar : card
             bullet.GetComponent<bullet>().damage += damageModifier;
             bullet.GetComponent<Rigidbody2D>().AddForce(direction.normalized * fireSpeed, ForceMode2D.Impulse);
         }
+        currPlayer.currEnergy -= energy;
     }
 }

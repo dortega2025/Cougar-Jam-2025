@@ -1,15 +1,16 @@
 using System.Collections;
 using UnityEngine;
 
-public class skellington : enemy
+public class shieldEnemy : enemy
 {
-    public GameObject bulletPrefab;
+    public GameObject shieldPrefab;
     private float fireSpeed = 300f;
+    public GameObject bulletPrefab;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public virtual void Start()
     {
         base.Start();
-        health = 15f;
+        health = 10f;
     }
 
     // Update is called once per frame
@@ -25,7 +26,23 @@ public class skellington : enemy
 
     void Ability()
     {
-        StartCoroutine(Attack());
+        int chanceRoll = Random.Range(1, 100);
+        if (chanceRoll <= 25)
+        {
+            StartCoroutine(Shield());
+        } else
+        {
+            StartCoroutine(Attack());
+        }
+    }
+
+    public IEnumerator Shield()
+    {
+        yield return new WaitForSeconds(2);
+        Instantiate(shieldPrefab, new Vector3(0, 100, 0), Quaternion.Euler(0, 0, 90));
+        isTurn = false;
+        battleSystemManager battleSystem = FindFirstObjectByType<battleSystemManager>();
+        battleSystem.nextTurn();
     }
 
     public IEnumerator Attack()
@@ -40,5 +57,5 @@ public class skellington : enemy
         isTurn = false;
         battleSystemManager battleSystem = FindFirstObjectByType<battleSystemManager>();
         battleSystem.nextTurn();
-    }
+    }    
 }

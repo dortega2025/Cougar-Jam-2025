@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 8052427812826460958}
   - component: {fileID: -672513229524311301}
   - component: {fileID: 8664054475991455664}
-  - component: {fileID: 9222006393505314654}
+  - component: {fileID: 3414980864595262367}
   m_Layer: 5
-  m_Name: bulletPrefab
+  m_Name: bulletPrefabEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
-  m_Color: {r: 0.8, g: 0.7227145, b: 0.2, a: 1}
+  m_Color: {r: 0.8018868, g: 0.22401981, b: 0.2004717, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -109,7 +109,7 @@ CapsuleCollider2D:
     m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 32
+    m_Bits: 8
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -157,7 +157,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &9222006393505314654
+--- !u!114 &3414980864595262367
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6105228279442520924}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63f6ec597719a481e9dd205aac7923de, type: 3}
+  m_Script: {fileID: 11500000, guid: 194e29dee422d42768f25eb1c3fd59e4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::bullet
-  damage: 1
+  m_EditorClassIdentifier: Assembly-CSharp::enemyBullet
+  damage: 10

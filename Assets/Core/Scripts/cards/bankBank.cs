@@ -6,15 +6,19 @@ public class bankBank : card
 {
     private float extraEnergy = 5f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public virtual void Start()
     {
         base.Start();
-        energy = 1f;
+        energy = 2f;
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
+        if (playerTurn != currPlayer.playerTurn)
+        {
+            playerTurn = currPlayer.playerTurn;
+        }
         if (playerTurn)
         {
             IsClicked();
@@ -31,7 +35,7 @@ public class bankBank : card
             extraTurn = false;
             hasAttacked = false;
         }
-        if (selected && target != null && !hasAttacked)
+        if (selected && targetedPlayer && !hasAttacked)
         {
             Ability();
             hasAttacked = true;
@@ -42,7 +46,7 @@ public class bankBank : card
     {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         RaycastHit2D hitData = Physics2D.Raycast(mousePos, Vector2.zero, 0);
-        if (hitData.collider && Mouse.current.leftButton.wasPressedThisFrame && hitData.collider.CompareTag("player"))
+        if (hitData.collider && Mouse.current.leftButton.wasPressedThisFrame && hitData.collider.gameObject == gameObject)
         {
             if (!selected)
             {
@@ -58,15 +62,16 @@ public class bankBank : card
     {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         RaycastHit2D hitData = Physics2D.Raycast(mousePos, Vector2.zero, 0);
-        if (hitData.collider && Mouse.current.leftButton.wasPressedThisFrame && hitData.collider.CompareTag("card"))
+        if (hitData.collider && Mouse.current.leftButton.wasPressedThisFrame && hitData.collider.CompareTag("Player"))
         {
-            targetCard = hitData.collider.gameObject.GetComponent<card>();
+            targetedPlayer = true;
         }
     }
 
     void Ability()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("player");
-        player.GetComponent<player>().currEnergy +=extraEnergy;
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        currPlayer.currEnergy -= energy;
+        player.GetComponent<player>().currEnergy += extraEnergy;
     }
 }
