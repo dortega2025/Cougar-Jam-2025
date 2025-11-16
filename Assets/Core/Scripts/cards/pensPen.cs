@@ -27,6 +27,6 @@ public class pensPen : card
 
     void Ability()
     {
-        Instantiate(shieldPrefab, target.transform.position - new Vector3(0, 5, 0), Quaternion.identity);
+        Instantiate(shieldPrefab, new Vector3(0, 60, 0), Quaternion.Euler(0, 0, 90));
     }
 }

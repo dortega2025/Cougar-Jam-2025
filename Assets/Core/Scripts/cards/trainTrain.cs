@@ -15,7 +15,7 @@ public class trainTrain : card
     // Update is called once per frame
     public virtual void Update()
     {
-         if (playerTurn)
+        if (playerTurn)
         {
             IsClicked();
         }

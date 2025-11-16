@@ -48,6 +48,10 @@ public class battleSystemManager : MonoBehaviour
         {
             DeactivateCards();
         }
+        if (turnOrder.Peek().CompareTag("enemy"))
+        {
+            turnOrder.Peek().GetComponent<enemy>().isTurn = true;
+        }
     }
 
     void ActivateCards()
